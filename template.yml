@@ -1,16 +1,16 @@
 parameters:
-  - name: WebAppNameDev
+  - name: "WebAppNameDev"
     type: string
-  - name: Package
+  - name: "Package"
     type: string
-  - name: Environment
+  - name: "Environment"
     type: string
 
 jobs:
   - deployment: Deploy
     pool:
       vmImage: "ubuntu-20.04"
-    environment: ${{Environment}}
+    environment: ${{ parameters.Environment }}
     variables:
       - group: "Release"
     strategy:
@@ -23,6 +23,6 @@ jobs:
               displayName: "Azure App Service Deploy: website"
               inputs:
                 azureSubscription: "Resource Manager - Tailspin - Space Game"
-                appName: "${{WebAppNameDev}}"
-                package: "${{Package}}"
+                appName: "${{ parameters.WebAppNameDev }}"
+                package: "${{ parameters.Package }}"
                 resourceGroupName: "tailspin-space-game-rg"
