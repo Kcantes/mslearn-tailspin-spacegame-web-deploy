@@ -1,0 +1,28 @@
+parameters:
+  - name: WebAppNameDev
+    type: string
+  - name: Package
+    type: string
+  - name: Environment
+    type: string
+
+jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: "ubuntu-20.04"
+    environment: $(Environment)
+    variables:
+      - group: "Release"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: current
+              artifact: drop
+            - task: AzureWebApp@1
+              displayName: "Azure App Service Deploy: website"
+              inputs:
+                azureSubscription: "Resource Manager - Tailspin - Space Game"
+                appName: "$(WebAppNameDev)"
+                package: "$(Package)"
+                resourceGroupName: "tailspin-space-game-rg"
