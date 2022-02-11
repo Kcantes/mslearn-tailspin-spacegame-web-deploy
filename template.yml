@@ -10,7 +10,7 @@ jobs:
   - deployment: Deploy
     pool:
       vmImage: "ubuntu-20.04"
-    environment: $(Environment)
+    environment: ${{Environment}}
     variables:
       - group: "Release"
     strategy:
@@ -23,6 +23,6 @@ jobs:
               displayName: "Azure App Service Deploy: website"
               inputs:
                 azureSubscription: "Resource Manager - Tailspin - Space Game"
-                appName: "$(WebAppNameDev)"
-                package: "$(Package)"
+                appName: "${{(WebAppNameDev}}"
+                package: "${{Package}}"
                 resourceGroupName: "tailspin-space-game-rg"
