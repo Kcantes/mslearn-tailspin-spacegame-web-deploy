@@ -23,6 +23,6 @@ jobs:
               displayName: "Azure App Service Deploy: website"
               inputs:
                 azureSubscription: "Resource Manager - Tailspin - Space Game"
-                appName: "${{(WebAppNameDev}}"
+                appName: "${{WebAppNameDev}}"
                 package: "${{Package}}"
                 resourceGroupName: "tailspin-space-game-rg"
